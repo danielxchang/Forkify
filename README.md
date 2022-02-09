@@ -1,2 +1,2 @@
-# forkify
-A food recipe application based on the Forkify API. Built using Vanilla Javascript via Parcel.
+# Forkify
+Forkify is a vanilla Javascript application that interacts with the Forkify API to fetch and display food recipe data.
