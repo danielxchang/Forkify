@@ -6,14 +6,21 @@
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dcphantom/forkify.git"
+  },
   "author": "Daniel Chang",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dcphantom/forkify/issues"
+  },
+  "homepage": "https://github.com/dcphantom/forkify#readme",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.2.1",
     "parcel": "^2.2.1"
   },
   "dependencies": {
-    "core-js": "^3.21.0",
-    "regenerator-runtime": "^0.13.9"
+    "fracty": "^1.0.9"
   }
 }
