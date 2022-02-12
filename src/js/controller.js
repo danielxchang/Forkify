@@ -31,6 +31,7 @@ const controlRecipes = async function () {
     await model.loadRecipe(id);
 
     // 3) Rendering recipe
+    await model.calculateCalories();
     recipeView.render(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
@@ -102,6 +103,7 @@ const controlAddRecipe = async function (newRecipe) {
     console.log(model.state.recipe);
 
     // Render recipe
+    await model.calculateCalories();
     recipeView.render(model.state.recipe);
 
     // Success message

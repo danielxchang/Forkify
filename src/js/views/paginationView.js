@@ -21,35 +21,23 @@ class PaginationView extends View {
       this._data.results.length / this._data.resultsPerPage
     );
 
-    // Page 1, and there are other pages
-    if (curPage === 1 && numPages > 1)
-      return this._generateMarkupButton(curPage, 'next');
-
-    // Last page
-    if (curPage === numPages && numPages > 1)
-      return this._generateMarkupButton(curPage, 'prev');
-
-    // Other page
-    if (curPage < numPages)
-      return `${this._generateMarkupButton(
-        curPage,
-        'prev'
-      )}${this._generateMarkupButton(curPage, 'next')}
-    `;
-
-    // Page 1, and there are NO other pages
-    return '';
+    return `${this._generateMarkupButton(curPage, 'Previous', numPages)}
+    <p class="total-pages">Page ${curPage} of ${numPages}</p>
+    ${this._generateMarkupButton(curPage, 'Next', numPages)}`;
   }
 
-  _generateMarkupButton(curPage, type) {
-    const goToPage = type === 'next' ? curPage + 1 : curPage - 1;
-    const icon = type === 'next' ? 'right' : 'left';
+  _generateMarkupButton(curPage, type, numPages) {
+    const goToPage = type === 'Next' ? curPage + 1 : curPage - 1;
+    const icon = type === 'Next' ? 'right' : 'left';
     return `
-    <button data-goto="${goToPage}" class="btn--inline pagination__btn--${type}">
-        <span>Page ${goToPage}</span>
+    <button data-goto="${goToPage}" class="btn--inline pagination__btn--${type}${
+      (goToPage === 0) | (goToPage > numPages) ? ' pagination-disabled' : ''
+    }">
+        ${type === 'Next' ? `<span>${type}</span>` : ''}
         <svg class="search__icon">
             <use href="${icons}#icon-arrow-${icon}"></use>
         </svg>
+        ${type === 'Previous' ? `<span>${type}</span>` : ''}
     </button>
   `;
   }

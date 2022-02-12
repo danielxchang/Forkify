@@ -1,5 +1,11 @@
 import { async } from 'regenerator-runtime';
-import { API_URL, RES_PER_PAGE, KEY } from './config.js';
+import {
+  API_URL,
+  SPOONACULAR_URL,
+  RES_PER_PAGE,
+  KEY,
+  SPOON_KEY,
+} from './config.js';
 import { AJAX } from './helpers.js';
 
 export const state = {
@@ -41,6 +47,58 @@ export const loadRecipe = async function (id) {
   }
 };
 
+export const calculateCalories = async function () {
+  try {
+    // 1) Retrieve spoonacular API ingredient IDs and add attribute to ingredient list objects
+    const ingredientIDs = state.recipe.ingredients.map(async ingObj => {
+      const data = await AJAX(
+        `${SPOONACULAR_URL}search?apiKey=${SPOON_KEY}&query=${ingObj.description}`
+      );
+      return { ...ingObj, id: data.results[0]?.id };
+    });
+
+    // 2) Iterate over ingredients to calculate total calories
+    const calories = await ingredientIDs.reduce(
+      async (total, ingPro) => await retrieveIngredientCalories(total, ingPro),
+      0
+    );
+
+    state.recipe.calories = calories > 0 ? calories : undefined;
+  } catch (err) {
+    console.log('ERR');
+    state.recipe.calories = undefined;
+  }
+};
+
+/**
+ *
+ * @param {*} total
+ * @param {*} ingPro
+ * @returns
+ * @todo check the calorie functions
+ */
+const retrieveIngredientCalories = async function (total, ingPro) {
+  try {
+    const { id, quantity: amount, unit } = await ingPro.then(ingObj => ingObj);
+    if (!id) return total;
+
+    // Retrieve ingredient data from spoonacular API for specified ID, amount, and unit
+    const data = await AJAX(
+      `${SPOONACULAR_URL}${id}/information?apiKey=${SPOON_KEY}${
+        amount ? `&amount=${amount}` : ''
+      }${unit ? `&unit=${unit}` : ''}`
+    );
+
+    const ingCals = data.nutrition?.nutrients.filter(
+      obj => obj.name === 'Calories'
+    )[0].amount;
+
+    return total + (ingCals || 0);
+  } catch (err) {
+    return total;
+  }
+};
+
 export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
@@ -74,6 +132,8 @@ export const updateServings = function (newServings) {
   state.recipe.ingredients.forEach(ing => {
     ing.quantity *= newServings / state.recipe.servings;
   });
+
+  state.recipe.calories *= newServings / state.recipe.servings;
 
   state.recipe.servings = newServings;
 };
