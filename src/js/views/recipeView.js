@@ -52,6 +52,17 @@ class RecipeView extends View {
       </div>
       <div class="recipe__info">
         <svg class="recipe__info-icon">
+          <use href="${icons}#icon-calories"></use>
+        </svg>
+        <span class="recipe__info-data recipe__info-data--minutes">${
+          isFinite(this._data.calories)
+            ? Math.trunc(this._data.calories)
+            : 'TBD'
+        }</span>
+        <span class="recipe__info-text">calories</span>
+      </div>
+      <div class="recipe__info">
+        <svg class="recipe__info-icon">
           <use href="${icons}#icon-users"></use>
         </svg>
         <span class="recipe__info-data recipe__info-data--people">${

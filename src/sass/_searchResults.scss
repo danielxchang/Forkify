@@ -10,6 +10,7 @@
 }
 
 .pagination {
+  display: flex;
   margin-top: auto;
   padding: 0 3.5rem;
 
@@ -27,6 +28,25 @@
       float: right;
     }
   }
+}
+
+.total-pages {
+  margin: auto;
+  color: #f38e82;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.pagination-disabled {
+  color: #6f7373;
+  pointer-events: none;
+  cursor: none;
 }
 
 .copyright {
