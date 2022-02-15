@@ -49,6 +49,8 @@ export const loadRecipe = async function (id) {
 
 export const calculateCalories = async function () {
   try {
+    state.recipe.calories = undefined;
+    return;
     // 1) Retrieve spoonacular API ingredient IDs and add attribute to ingredient list objects
     const ingredientIDs = state.recipe.ingredients.map(async ingObj => {
       const data = await AJAX(
@@ -70,13 +72,6 @@ export const calculateCalories = async function () {
   }
 };
 
-/**
- *
- * @param {*} total
- * @param {*} ingPro
- * @returns
- * @todo check the calorie functions
- */
 const retrieveIngredientCalories = async function (total, ingPro) {
   try {
     const { id, quantity: amount, unit } = await ingPro.then(ingObj => ingObj);
