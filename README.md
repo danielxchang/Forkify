@@ -1,4 +1,7 @@
 # Forkify
+
+https://forkify-dc.netlify.app/
+
 Forkify is a vanilla Javascript application that interacts with the Forkify API to fetch and display food recipe data.
 
 I completed this project as part of Jonas Schmedtmann's "The Complete JavaScript Course 2022: From Zero to Expert!" on Udemy. I expanded the project with the following features and code refactoring:
