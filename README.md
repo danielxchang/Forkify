@@ -1,6 +1,23 @@
 # Forkify
 
-https://forkify-dc.netlify.app/
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://forkify-dc.netlify.app/">
+    <img src="./src/img/logo.png" alt="Logo" width="100%" height="100%">
+  </a>
+
+  <h3 align="center">Forkify</h3>
+
+  <p align="center">
+    Forkify is a vanilla Javascript application that interacts with the Forkify API to fetch and display food recipe data.
+    <br />
+    <a href="#about-the-project"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://forkify-dc.netlify.app/">View Demo</a>
+  </p>
+</p>
 
 Forkify is a vanilla Javascript application that interacts with the Forkify API to fetch and display food recipe data.
 
