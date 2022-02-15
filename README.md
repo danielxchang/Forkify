@@ -3,12 +3,7 @@
   <a href="https://forkify-dc.netlify.app/">
     <img src="./src/img/logo.png" alt="Logo" width="100%" height="100%">
   </a>
-  <p>
-    A food recipe application for searching recipes made with Javascript.
-    <br />
-    <br />
-    <a href="https://forkify-dc.netlify.app/">View Demo</a>
-  </p>
+  <a href="https://forkify-dc.netlify.app/">View Demo</a>
 </p>
 
 ## About
